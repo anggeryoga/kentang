@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kentang Gantenk Official</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #FFA500;
+            --white: #fff;
+            --light-gray: #f4f4f4;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 16px;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .container {
+            background-color: var(--white);
+            border-radius: 1.25rem;
+            box-shadow: 0 0.625rem 1.25rem rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 37.5rem;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .profile {
+            margin-bottom: 2.5rem;
+        }
+        .profile img {
+            width: 9.375rem;
+            height: 9.375rem;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0.3125rem 0.625rem rgba(0,0,0,0.1);
+        }
+        .profile h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .link-button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 0.625rem;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 0.3125rem 0.625rem rgba(255,107,107,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            text-align: center;
+        }
+        .link-button:hover {
+            transform: translateY(-0.3125rem);
+            box-shadow: 0 0.625rem 1.25rem rgba(255,107,107,0.5);
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input {
+            padding: 0.875rem 1.25rem;
+            border: 1px solid #ddd;
+            border-radius: 0.625rem;
+            background-color: var(--light-gray);
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+        }
+        .contact-form .input-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .contact-form .input-row input {
+            flex: 1;
+        }
+        .contact-form button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 0.625rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0.3125rem 0.625rem rgba(255,165,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contact-form button:hover {
+            transform: translateY(-0.3125rem);
+            box-shadow: 0 0.625rem 1.25rem rgba(255,165,0,0.5);
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .profile img {
+                width: 7.5rem;
+                height: 7.5rem;
+            }
+            .links {
+                grid-template-columns: 1fr;
+            }
+            .contact-form .input-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <img src="https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/WhatsApp%20Image%202024-12-06%20at%2011.02.33-uAhUGASy5Qz2A3kNBWIRzkGy89xAVX.jpeg" alt="Profil" width="150" height="150">
+            <h2>Kentang Gantenk Official</h2>
+        </div>
+
+        <div class="links">
+            <a href="#" class="link-button">Admin Livia</a>
+            <a href="#" class="link-button">Admin Reka</a>
+            <a href="#" class="link-button">Admin Risma</a>
+            <a href="#" class="link-button">Kontak</a>
+        </div>
+
+        <form id="contactForm" class="contact-form">
+            <input type="text" id="name" placeholder="Nama Lengkap" required>
+            <div class="input-row">
+                <input type="text" id="postcode" placeholder="Kode Pos" required>
+                <input type="text" id="address" placeholder="Alamat Lengkap" required>
+            </div>
+            <input type="tel" id="phone" placeholder="Nomor HP" required>
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contactForm');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = {
+                    name: document.getElementById('name').value,
+                    postcode: document.getElementById('postcode').value,
+                    address: document.getElementById('address').value,
+                    phone: document.getElementById('phone').value
+                };
+
+                // Kirim data ke Google Sheets
+                submitToGoogleSheet(formData);
+
+                // Kirim pesan WhatsApp
+                sendWhatsAppMessage(formData);
+            });
+
+            function submitToGoogleSheet(data) {
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzj3FrJauGQPEpsl6aBOU9lyPp0QCPh1ayPN2Pb88QY4NJrE1EnIqbphPS3o6hqeJ9A/exec'; // Akan diganti dengan URL dari AppsScript
+                
+                fetch(scriptURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.text();
+                })
+                .then(text => {
+                    try {
+                        const jsonResponse = JSON.parse(text);
+                        console.log('Parsed response:', jsonResponse);
+                        
+                        if (jsonResponse.status === 'success') {
+                            alert('Data berhasil disimpan!');
+                            contactForm.reset(); // Reset formulir setelah berhasil
+                        } else {
+                            alert('Gagal menyimpan data: ' + jsonResponse.message);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing response:', error);
+                        alert('Terjadi kesalahan saat memproses respons');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting to Google Sheets:', error);
+                    alert('Gagal mengirim data. Periksa koneksi internet Anda.');
+                });
+            }
+
+            function sendWhatsAppMessage(data) {
+                const phoneNumber = '085155145788'; // Nomor WhatsApp target
+                const message = `Pendaftaran Baru:
+Nama: ${data.name}
+Kode Pos: ${data.postcode}
+Alamat: ${data.address}
+Nomor HP: ${data.phone}`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                
+                window.open(whatsappURL, '_blank');
+            }
+        });
+    </script>
+</body>
+</html>
