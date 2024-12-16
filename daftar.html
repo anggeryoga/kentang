@@ -145,6 +145,10 @@
                     <label for="pekerjaan">Pekerjaan</label>
                     <input type="text" id="pekerjaan" name="pekerjaan" required placeholder="Masukkan pekerjaan">
                 </div>
+                <div class="form-input">
+                    <label for="Usia">Usia</label>
+                    <input type="text" id="Usia" name="Usia" required placeholder="Masukkan Umur Anda">
+                </div>
                 
                 <div class="form-input">
                     <label for="no-hp">Nomor Handphone</label>
@@ -152,7 +156,7 @@
                 </div>
 
                 <div class="form-input">
-                    <label for="lokasi-usaha">Status Lokasi Usaha</label>
+                    <label for="lokasi-usaha">Lokasi Usaha</label>
                     <select id="lokasi-usaha" name="lokasi-usaha" required>
                         <option value="" selected disabled>Pilih Status Lokasi</option>
                         <option value="Belum">Belum Punya Lokasi</option>
@@ -181,7 +185,7 @@
                     <input type="hidden" id="dana-usaha" name="dana-usaha" required>
                 </div>
                 
-                <button type="submit" class="submit-btn">Daftar Sekarang</button>
+                <button type="submit" class="submit-btn">Hubungi Admin di WhatsApp</button>
             </form>
         </div>
     </div>
@@ -194,7 +198,10 @@
         const additionalAddressInput = document.getElementById('alamat-usaha');
         const danaOptions = document.querySelectorAll('.dana-option');
         const danaUsahaInput = document.getElementById('dana-usaha');
-        const adminNumbers = ['085155145788', '082324159922'];
+        const adminDetails = [
+            { number: '085155145788', name: 'Admin Livia' },
+            { number: '082324159922', name: 'Admin Reka' }
+        ];
         let isSubmitting = false;
 
         // Location status dynamic form
@@ -224,9 +231,9 @@
         });
 
         // Random WhatsApp Number Selection
-        function getRandomAdminNumber() {
-            const randomIndex = Math.floor(Math.random() * adminNumbers.length);
-            return adminNumbers[randomIndex];
+        function getRandomAdminContact() {
+            const randomIndex = Math.floor(Math.random() * adminDetails.length);
+            return adminDetails[randomIndex];
         }
 
         // Form Submission
@@ -242,8 +249,6 @@
 
             isSubmitting = true;
 
-            alert('Kami sedang mengirimkan jawaban formulir Anda. Silakan tunggu sebentar!');
-
             const formData = new FormData(form);
 
             // Modify form data based on location status
@@ -255,18 +260,22 @@
             const nama = formData.get('nama');
             const alamat = formData.get('Alamat');
             const danaUsaha = danaUsahaInput.value;
-            const randomAdminNumber = getRandomAdminNumber();
+            const randomAdmin = getRandomAdminContact();
+
+            // Add admin to form data for spreadsheet tracking
+            formData.append('admin', randomAdmin.name);
 
             // Prepare WhatsApp message
             const waMessage = encodeURIComponent(`Hallo kak admin, aku ${nama} dari ${alamat} mau buka usaha dengan budget ${danaUsaha}`);
-            const waLink = `https://wa.me/${randomAdminNumber}?text=${waMessage}`;
+            const waLink = `https://wa.me/${randomAdmin.number}?text=${waMessage}`;
 
             // Save data to local storage
             const submissionData = {
                 nama,
                 alamat,
                 danaUsaha,
-                kontakAdmin: randomAdminNumber,
+                kontakAdmin: randomAdmin.number,
+                adminNama: randomAdmin.name,
                 tanggal: new Date().toISOString()
             };
 
@@ -278,18 +287,12 @@
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
                     if (response.ok) {
-                        alert('Formulir terkirim! Silakan konfirmasi dengan CS kami melalui WhatsApp.');
-                        
-                        // Open WhatsApp link
-                        window.open(waLink, '_blank');
-
-                        form.reset();
-                        additionalAddressDiv.style.display = 'none';
-                        danaOptions.forEach(opt => opt.classList.remove('selected'));
+                        // Directly redirect to WhatsApp without additional alerts
+                        window.location.href = waLink;
                     } else {
                         alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+                        isSubmitting = false;
                     }
-                    isSubmitting = false;
                 })
                 .catch(error => {
                     alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
