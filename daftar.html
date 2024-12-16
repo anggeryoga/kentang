@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" translate="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kemitraan Kentang Gantenk</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #ff8c00;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,217 +21,164 @@
         }
 
         body {
-            background-color: #fff4e6;
+            background-color: var(--background-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-
-            line-height: 1.6;
+            padding: 0;
         }
 
         .container {
             width: 100%;
-            max-width: 400px;
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .profile {
-            text-align: center;
-            padding: 30px 20px 20px;
-            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-            color: white;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-        }
-
-        .profile img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid white;
-            object-fit: cover;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .profile h1 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .profile p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .link-group {
-            padding: 20px;
-            background-color: #fff4e6;
-        }
-
-        .link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .link-btn i {
-            margin-right: 10px;
-            position: absolute;
-            left: 20px;
-        }
-
-        .link-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        }
-
-        .link-btn-1 { 
-            background-color: #ff6b6b;
-        }
-
-        .link-btn-2 { 
-            background-color: #4ecdc4;
-        }
-
-        .link-btn-3 { 
-            background-color: #45b7d1;
-        }
-
-        .link-btn-4 { 
-            background-color: #ff8c00;
+            max-width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
         .form-section {
-            background-color: white;
-            padding: 20px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
+            padding: 30px 20px;
+        }
+
+        .form-section h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
         }
 
         .form-input {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-input label {
             display: block;
-            margin-bottom: 5px;
-            color: #333;
+            margin-bottom: 8px;
+            color: var(--text-color);
             font-weight: 600;
         }
 
         .form-input input, 
-        .form-input textarea, 
         .form-input select {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
-            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
         }
 
-        .form-input textarea {
-            resize: vertical;
+        .form-input input:focus, 
+        .form-input select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #additional-address {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .submit-btn {
             width: 100%;
             padding: 15px;
-            background-color: #ff8c00;
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--white);
             border: none;
-            border-radius: 15px;
+            border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
         .submit-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            background-color: #e67e00;
+            transform: translateY(-2px);
         }
 
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-                max-width: 100%;
-                margin: 0;
-                border-radius: 0;
-            }
+        .dana-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dana-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dana-option:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(255,140,0,0.05);
+        }
+
+        .dana-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(255,140,0,0.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="profile">
-            <img src="https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/WhatsApp%20Image%202024-12-06%20at%2011.02.33-ZPduuL4CKOQZdixaUSEFRfWdlnllyU.jpeg" alt="Kentang Gantenk Logo">
-            <h1>Kentang Gantenk</h1>
-            <p>Paket Usaha Kentang Kekinian!</p>
-        </div>
-
-        <div class="link-group">
-            <a href="https://wa.me/6282124952606?text=Hallo%20kak%20Livia%2C%20mau%20bertanya%20tentang%20kemitraan%20Kentang%20yang%20di%20Tiktok" class="link-btn link-btn-1" target="_blank">
-                <i class="fab fa-whatsapp"></i> Admin Livia
-            </a>
-            <a href="https://wa.me/6281212126722?text=Hallo%20kak%20Risma%2C%20mau%20bertanya%20tentang%20kemitraan%20Kentang%20yang%20di%20Tiktok" class="link-btn link-btn-2" target="_blank">
-                <i class="fab fa-whatsapp"></i> Admin Risma
-            </a>
-            <a href="https://wa.me/6281212125422?text=Hallo%20kak%20Reka%2C%20mau%20bertanya%20tentang%20kemitraan%20Kentang%20yang%20di%20Tiktok" class="link-btn link-btn-3" target="_blank">
-                <i class="fab fa-whatsapp"></i> Admin Reka
-            </a>
-            <a href="#" class="link-btn link-btn-4">
-                <i class="fas fa-globe"></i> Website
-            </a>
-        </div>
-
         <div class="form-section">
-            <h1>Form Gabung Usaha</h1>
-            <form name="form-kontak">
+            <h1>Form Kemitraan</h1>
+            <form name="form-kontak" id="partnership-form">
                 <div class="form-input">
                     <label for="nama">Nama Lengkap</label>
                     <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-input">
+                    <label for="Alamat">Alamat</label>
+                    <input type="text" id="Alamat" name="Alamat" required placeholder="Masukkan Alamat">
+                </div>
+                <div class="form-input">
+                    <label for="pekerjaan">Pekerjaan</label>
+                    <input type="text" id="pekerjaan" name="pekerjaan" required placeholder="Masukkan pekerjaan">
                 </div>
                 
                 <div class="form-input">
                     <label for="no-hp">Nomor Handphone</label>
                     <input type="tel" id="no-hp" name="no-hp" pattern="[0-9]{10,14}" required placeholder="Contoh: 081234567890">
                 </div>
-                
+
                 <div class="form-input">
-                    <label for="email">Alamat Email (Opsional)</label>
-                    <input type="email" id="email" name="email" placeholder="email@contoh.com">
-                </div>
-                
-                <div class="form-input">
-                    <label for="pembayaran">Metode Pembayaran</label>
-                    <select id="pembayaran" name="pembayaran" required>
-                        <option value="" selected disabled>Pilih Metode Pembayaran</option>
-                        <option value="DP">DP</option>
-                        <option value="Cash">Cash</option>
-                        <option value="Marketplace">Marketplace</option>
-                        <option value="cod">COD</option>
-                        <option value="Transfer">Transfer Lunas</option>
+                    <label for="lokasi-usaha">Status Lokasi Usaha</label>
+                    <select id="lokasi-usaha" name="lokasi-usaha" required>
+                        <option value="" selected disabled>Pilih Status Lokasi</option>
+                        <option value="Belum">Belum Punya Lokasi</option>
+                        <option value="Sudah">Sudah Punya Lokasi</option>
                     </select>
+                </div>
+
+                <div id="additional-address" class="form-input">
+                    <label for="alamat-usaha">Alamat Lokasi Usaha</label>
+                    <input type="text" id="alamat-usaha" name="alamat-usaha" placeholder="Masukkan alamat lokasi usaha">
+                </div>
+
+                <div class="form-input">
+                    <label>Dana Untuk Buka Usaha</label>
+                    <div class="dana-options">
+                        <div class="dana-option" data-value="2.000.000-5.000.000">
+                            Rp 2.000.000 - Rp 5.000.000
+                        </div>
+                        <div class="dana-option" data-value="6.000.000-8.000.000">
+                            Rp 6.000.000 - Rp 8.000.000
+                        </div>
+                        <div class="dana-option" data-value="9.000.000-15.000.000">
+                            Rp 9.000.000 - Rp 15.000.000
+                        </div>
+                    </div>
+                    <input type="hidden" id="dana-usaha" name="dana-usaha" required>
                 </div>
                 
                 <button type="submit" class="submit-btn">Daftar Sekarang</button>
@@ -235,43 +188,55 @@
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwJeHleSLg0JQE87Oc4dwYQv509YqIFeu9FNBu6siTFoty3JGl_Q_psdqHN5MnruBs/exec';
-        const form = document.forms['form-kontak'];
+        const form = document.getElementById('partnership-form');
+        const lokasiUsahaSelect = document.getElementById('lokasi-usaha');
+        const additionalAddressDiv = document.getElementById('additional-address');
+        const additionalAddressInput = document.getElementById('alamat-usaha');
+        const danaOptions = document.querySelectorAll('.dana-option');
+        const danaUsahaInput = document.getElementById('dana-usaha');
+        const adminNumbers = ['085155145788', '082324159922'];
         let isSubmitting = false;
 
-        // Function to send WhatsApp message
-        function sendWhatsAppMessage(formData) {
-            const nama = formData.get('nama');
-            const noHp = formData.get('no-hp');
-            const pembayaran = formData.get('pembayaran');
-            const email = formData.get('email') || 'Tidak diisi';
+        // Location status dynamic form
+        lokasiUsahaSelect.addEventListener('change', function() {
+            if (this.value === 'Sudah') {
+                additionalAddressDiv.style.display = 'block';
+                additionalAddressInput.required = true;
+            } else {
+                additionalAddressDiv.style.display = 'none';
+                additionalAddressInput.required = false;
+                additionalAddressInput.value = '';
+            }
+        });
 
-            const message = `Halo! Ada Pendaftaran Kemitraan Baru:\n\n` +
-                            `*Nama:* ${nama}\n` +
-                            `*Nomor HP:* ${noHp}\n` +
-                            `*Metode Pembayaran:* ${pembayaran}\n` +
-                            `*Email:* ${email}\n\n` +
-                            `Silakan segera di proses ya!`;
-
-            const whatsappURL = `https://wa.me/6285155219000?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
-        }
-
-        // Event listeners for buttons
-        const buttons = document.querySelectorAll('.link-btn');
-        buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                // Website button
-                if (button.classList.contains('link-btn-4')) {
-                    e.preventDefault();
-                    alert('Informasi Website akan segera kami sampaikan!');
-                }
+        // Dana Usaha Selection
+        danaOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected from all options
+                danaOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected to clicked option
+                this.classList.add('selected');
+                
+                // Set hidden input value
+                danaUsahaInput.value = this.getAttribute('data-value');
             });
         });
 
+        // Random WhatsApp Number Selection
+        function getRandomAdminNumber() {
+            const randomIndex = Math.floor(Math.random() * adminNumbers.length);
+            return adminNumbers[randomIndex];
+        }
+
+        // Form Submission
         form.addEventListener('submit', e => {
             e.preventDefault();
 
-            if (isSubmitting) {
+            if (isSubmitting) return;
+
+            if (!danaUsahaInput.value) {
+                alert('Silakan pilih nominal dana usaha');
                 return;
             }
 
@@ -281,24 +246,54 @@
 
             const formData = new FormData(form);
 
+            // Modify form data based on location status
+            if (lokasiUsahaSelect.value === 'Belum') {
+                formData.set('alamat-usaha', 'Belum Punya');
+            }
+
+            // Get form values for WhatsApp message
+            const nama = formData.get('nama');
+            const alamat = formData.get('Alamat');
+            const danaUsaha = danaUsahaInput.value;
+            const randomAdminNumber = getRandomAdminNumber();
+
+            // Prepare WhatsApp message
+            const waMessage = encodeURIComponent(`Hallo kak admin, aku ${nama} dari ${alamat} mau buka usaha dengan budget ${danaUsaha}`);
+            const waLink = `https://wa.me/${randomAdminNumber}?text=${waMessage}`;
+
+            // Save data to local storage
+            const submissionData = {
+                nama,
+                alamat,
+                danaUsaha,
+                kontakAdmin: randomAdminNumber,
+                tanggal: new Date().toISOString()
+            };
+
+            // Check and create submissions array in local storage
+            let submissions = JSON.parse(localStorage.getItem('partnershipSubmissions') || '[]');
+            submissions.push(submissionData);
+            localStorage.setItem('partnershipSubmissions', JSON.stringify(submissions));
+
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
                     if (response.ok) {
-                        // Send WhatsApp message
-                        sendWhatsAppMessage(formData);
+                        alert('Formulir terkirim! Silakan konfirmasi dengan CS kami melalui WhatsApp.');
+                        
+                        // Open WhatsApp link
+                        window.open(waLink, '_blank');
 
-                        alert('Formulir terkirim! Silakan konfirmasi dengan CS kami. Terima kasih telah bergabung!');
                         form.reset();
+                        additionalAddressDiv.style.display = 'none';
+                        danaOptions.forEach(opt => opt.classList.remove('selected'));
                     } else {
                         alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
                     }
-
                     isSubmitting = false;
                 })
                 .catch(error => {
                     alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
                     console.error('Error!', error.message);
-
                     isSubmitting = false;
                 });
         });
