@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,131 +8,200 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #ff8c00;
-            --background-color: #f4f4f4;
+            --primary-color: #2c3e50;
+            /* Warna gelap yang kuat */
+            --secondary-color: #ecf0f1;
+            /* Warna latar belakang ringan */
+            --accent-color: #3498db;
+            /* Warna aksen cerah */
             --text-color: #333;
-            --white: #ffffff;
+            --border-radius: 12px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Roboto', sans-serif;
         }
 
         body {
-            background-color: var(--background-color);
+            background-color: var(--secondary-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 0;
+            line-height: 1.6;
         }
 
         .container {
             width: 100%;
-            max-width: 100%;
-            background-color: var(--white);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            max-width: 600px;
+            background-color: white;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.05),
+                0 4px 15px rgba(0, 0, 0, 0.03);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 2px solid var(--primary-color);
         }
 
         .form-section {
-            padding: 30px 20px;
+            padding: 40px 30px;
         }
 
         .form-section h1 {
             text-align: center;
             color: var(--primary-color);
-            margin-bottom: 25px;
-            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 800;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .form-section h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
         }
 
         .form-input {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         .form-input label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .form-input input,
+        .form-input select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: var(--secondary-color);
+        }
+
+        .form-input input:focus,
+        .form-input select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .dana-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .dana-option {
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
             font-weight: 600;
         }
 
-        .form-input input, 
-        .form-input select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
+        .dana-option:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
 
-        .form-input input:focus, 
-        .form-input select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        #additional-address {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .dana-option.selected {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
         }
 
         .submit-btn {
             width: 100%;
             padding: 15px;
             background-color: var(--primary-color);
-            color: var(--white);
+            color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .submit-btn:hover {
-            background-color: #e67e00;
-            transform: translateY(-2px);
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .dana-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
+        /* Responsivitas Full Width untuk Mobile */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+            }
+
+            .form-section {
+                padding: 30px 20px;
+            }
+
+            .form-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .dana-options {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .dana-option {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* Animasi Tambahan */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .dana-option:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(255,140,0,0.05);
-        }
-
-        .dana-option.selected {
-            border-color: var(--primary-color);
-            background-color: rgba(255,140,0,0.1);
+        #additional-address {
+            display: none;
+            animation: fadeIn 0.4s ease;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-section">
-            <h1>Form Kemitraan</h1>
+            <h1>Form Kemitraan Kentang Gantenk</h1>
             <form name="form-kontak" id="partnership-form">
                 <div class="form-input">
                     <label for="nama">Nama Lengkap</label>
@@ -147,12 +217,18 @@
                 </div>
                 <div class="form-input">
                     <label for="Usia">Usia</label>
-                    <input type="text" id="Usia" name="Usia" required placeholder="Masukkan Umur Anda">
+                    <input type="number" id="Usia" name="usia" required min="0" max="120"
+                        placeholder="Masukkan Usia Anda" data-tahun="Tahun">
                 </div>
-                
+                <div class="form-input">
+                    <label for="Opening">Rencana Opening</label>
+                    <input type="text" id="Opening" name="Opening" required placeholder="Masukkan Rencana Opening">
+                </div>
+
                 <div class="form-input">
                     <label for="no-hp">Nomor Handphone</label>
-                    <input type="tel" id="no-hp" name="no-hp" pattern="[0-9]{10,14}" required placeholder="Contoh: 081234567890">
+                    <input type="tel" id="no-hp" name="no-hp" pattern="[0-9]{10,14}" required
+                        placeholder="Contoh: 081234567890">
                 </div>
 
                 <div class="form-input">
@@ -184,13 +260,30 @@
                     </div>
                     <input type="hidden" id="dana-usaha" name="dana-usaha" required>
                 </div>
-                
+
                 <button type="submit" class="submit-btn">Hubungi Admin di WhatsApp</button>
             </form>
         </div>
     </div>
 
     <script>
+
+        // Enhanced Admin Details with additional metadata
+        const adminDetails = [
+            {
+                number: '6282124952606',
+                name: 'Admin Livia',
+                lastAssignedTime: null,
+                assignmentCount: 0
+            },
+            {
+                number: '6281212125422',
+                name: 'Admin Reka',
+                lastAssignedTime: null,
+                assignmentCount: 0
+            }
+        ];
+
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwJeHleSLg0JQE87Oc4dwYQv509YqIFeu9FNBu6siTFoty3JGl_Q_psdqHN5MnruBs/exec';
         const form = document.getElementById('partnership-form');
         const lokasiUsahaSelect = document.getElementById('lokasi-usaha');
@@ -198,14 +291,89 @@
         const additionalAddressInput = document.getElementById('alamat-usaha');
         const danaOptions = document.querySelectorAll('.dana-option');
         const danaUsahaInput = document.getElementById('dana-usaha');
-        const adminDetails = [
-            { number: '6282124952606', name: 'Admin Livia' },
-            { number: '6281212125422', name: 'Admin Reka' }
-        ];
         let isSubmitting = false;
 
+        // Function to get IP address (browser-based method)
+        function getClientIP() {
+            return new Promise((resolve) => {
+                // Fallback method if WebRTC fails
+                const fallbackIP = `fallback_${Math.random().toString(36).substr(2, 9)}`;
+
+                window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+
+                if (!window.RTCPeerConnection) {
+                    resolve(fallbackIP);
+                    return;
+                }
+
+                const pc = new RTCPeerConnection({
+                    iceServers: []
+                });
+
+                pc.createDataChannel("");
+
+                pc.createOffer((offer) => {
+                    pc.setLocalDescription(offer);
+                }, () => { });
+
+                pc.onicecandidate = (ice) => {
+                    if (!ice || !ice.candidate || !ice.candidate.candidate) {
+                        resolve(fallbackIP);
+                        return;
+                    }
+
+                    const myIP = ice.candidate.candidate.split(' ')[4];
+                    resolve(myIP);
+                    pc.close();
+                };
+            });
+        }
+
+        // Enhanced admin selection function
+        async function selectAdminContact() {
+            // Retrieve submission history from localStorage
+            const ipAddress = await getClientIP();
+            const submissionHistory = JSON.parse(localStorage.getItem('partnershipSubmissions') || '[]');
+
+            // Check IP's previous admin assignment
+            const ipPreviousAdmin = submissionHistory
+                .filter(submission => submission.ipAddress === ipAddress)
+                .map(submission => submission.adminNama)
+                .pop(); // Get the most recent admin for this IP
+
+            // Get current time for deterministic selection
+            const currentTime = new Date();
+            const currentSeconds = currentTime.getSeconds();
+
+            // Determine admin based on seconds
+            let selectedAdmin;
+            if (currentSeconds >= 1 && currentSeconds <= 30) {
+                selectedAdmin = adminDetails.find(admin => admin.name === 'Admin Reka');
+            } else {
+                selectedAdmin = adminDetails.find(admin => admin.name === 'Admin Livia');
+            }
+
+            // Fallback or override logic
+            if (ipPreviousAdmin) {
+                // If IP has previous admin, try to alternate
+                const alternateAdmin = adminDetails.find(admin => admin.name !== ipPreviousAdmin);
+                if (alternateAdmin) {
+                    selectedAdmin = alternateAdmin;
+                }
+            }
+
+            // Update admin metadata
+            selectedAdmin.lastAssignedTime = currentTime;
+            selectedAdmin.assignmentCount++;
+
+            return {
+                number: selectedAdmin.number,
+                name: selectedAdmin.name
+            };
+        }
+
         // Location status dynamic form
-        lokasiUsahaSelect.addEventListener('change', function() {
+        lokasiUsahaSelect.addEventListener('change', function () {
             if (this.value === 'Sudah') {
                 additionalAddressDiv.style.display = 'block';
                 additionalAddressInput.required = true;
@@ -218,26 +386,20 @@
 
         // Dana Usaha Selection
         danaOptions.forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function () {
                 // Remove selected from all options
                 danaOptions.forEach(opt => opt.classList.remove('selected'));
-                
+
                 // Add selected to clicked option
                 this.classList.add('selected');
-                
+
                 // Set hidden input value
                 danaUsahaInput.value = this.getAttribute('data-value');
             });
         });
 
-        // Random WhatsApp Number Selection
-        function getRandomAdminContact() {
-            const randomIndex = Math.floor(Math.random() * adminDetails.length);
-            return adminDetails[randomIndex];
-        }
-
         // Form Submission
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             if (isSubmitting) return;
@@ -249,57 +411,68 @@
 
             isSubmitting = true;
 
-            const formData = new FormData(form);
+            try {
+                // Get enhanced random admin selection
+                const randomAdmin = await selectAdminContact();
 
-            // Modify form data based on location status
-            if (lokasiUsahaSelect.value === 'Belum') {
-                formData.set('alamat-usaha', 'Belum Punya');
-            }
+                const formData = new FormData(form);
 
-            // Get form values for WhatsApp message
-            const nama = formData.get('nama');
-            const alamat = formData.get('Alamat');
-            const danaUsaha = danaUsahaInput.value;
-            const randomAdmin = getRandomAdminContact();
+                // Modify form data based on location status
+                if (lokasiUsahaSelect.value === 'Belum') {
+                    formData.set('alamat-usaha', 'Belum Punya');
+                }
 
-            // Add admin to form data for spreadsheet tracking
-            formData.append('admin', randomAdmin.name);
+                // Get form values for WhatsApp message
+                const nama = formData.get('nama');
+                const alamat = formData.get('Alamat');
+                const danaUsaha = danaUsahaInput.value;
 
-            // Prepare WhatsApp message
-            const waMessage = encodeURIComponent(`Hallo kak admin, aku ${nama} dari ${alamat} mau buka usaha dengan budget ${danaUsaha}`);
-            const waLink = `https://wa.me/${randomAdmin.number}?text=${waMessage}`;
+                // Add admin to form data for spreadsheet tracking
+                formData.append('admin', randomAdmin.name);
 
-            // Save data to local storage
-            const submissionData = {
-                nama,
-                alamat,
-                danaUsaha,
-                kontakAdmin: randomAdmin.number,
-                adminNama: randomAdmin.name,
-                tanggal: new Date().toISOString()
-            };
+                // Prepare WhatsApp message
+                const waMessage = encodeURIComponent(`Hallo kak admin, aku ${nama} dari ${alamat} mau buka usaha dengan budget ${danaUsaha}`);
+                const waLink = `https://wa.me/${randomAdmin.number}?text=${waMessage}`;
 
-            // Check and create submissions array in local storage
-            let submissions = JSON.parse(localStorage.getItem('partnershipSubmissions') || '[]');
-            submissions.push(submissionData);
-            localStorage.setItem('partnershipSubmissions', JSON.stringify(submissions));
+                // Save data to local storage with IP tracking
+                const submissionData = {
+                    nama,
+                    alamat,
+                    danaUsaha,
+                    kontakAdmin: randomAdmin.number,
+                    adminNama: randomAdmin.name,
+                    tanggal: new Date().toISOString(),
+                    ipAddress: await getClientIP() // Store IP for tracking
+                };
 
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => {
-                    if (response.ok) {
-                        // Directly redirect to WhatsApp without additional alerts
-                        window.location.href = waLink;
-                    } else {
+                // Check and create submissions array in local storage
+                let submissions = JSON.parse(localStorage.getItem('partnershipSubmissions') || '[]');
+                submissions.push(submissionData);
+                localStorage.setItem('partnershipSubmissions', JSON.stringify(submissions));
+
+                // Submit to Google Sheet
+                fetch(scriptURL, { method: 'POST', body: formData })
+                    .then(response => {
+                        if (response.ok) {
+                            // Directly redirect to WhatsApp without additional alerts
+                            window.location.href = waLink;
+                        } else {
+                            alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+                            isSubmitting = false;
+                        }
+                    })
+                    .catch(error => {
                         alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+                        console.error('Error!', error.message);
                         isSubmitting = false;
-                    }
-                })
-                .catch(error => {
-                    alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
-                    console.error('Error!', error.message);
-                    isSubmitting = false;
-                });
+                    });
+            } catch (error) {
+                console.error('Admin selection error:', error);
+                alert('Terjadi kesalahan dalam pemilihan admin. Silakan coba lagi.');
+                isSubmitting = false;
+            }
         });
     </script>
 </body>
+
 </html>
